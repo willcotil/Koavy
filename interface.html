@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koavy</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/40 border-b border-cyan-400/20">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <h1 class="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent", class="titulo">
+      Koavy
+    </h1>
+
+    <div class="hidden md:flex gap-10 text-gray-300">
+      <a href="interface.html" class="nav-active relative">Início</a>
+      <a href="#" class="hover:text-cyan-400 transition">Benefícios</a>
+      <a href="#" class="hover:text-cyan-400 transition">Sobre</a>
+    </div>
+
+    <a href="login.html" class="hidden md:block bg-gradient-to-r from-cyan-400 to-emerald-400 text-black px-6 py-2 rounded-full font-bold hover:scale-105 transition">
+      Entrar
+    </a>
+
+    <button id="menu-btn" class="md:hidden text-white text-2xl">
+      ☰
+    </button>
+
+  </div>
+
+  <div id="mobile-menu" class="hidden flex-col items-center gap-6 py-6 bg-black/90 md:hidden">
+    <a href="interface.html" class="nav-active">Início</a>
+    <a href="#" class="text-gray-300 hover:text-cyan-400">Benefícios</a>
+    <a href="#" class="text-gray-300 hover:text-cyan-400">Sobre</a>
+
+    <a href="login.html" class="bg-gradient-to-r from-cyan-400 to-emerald-400 text-black px-6 py-2 rounded-full font-bold">
+      Entrar
+    </a>
+  </div>
+</nav>
+
+<section class="secaoHero pt-28">
+  <div id="particulas"></div>
+
+  <div class="conteudoHero">
+    <h1>Monitore seu coração em tempo real</h1>
+    <p>Monitoramento inteligente com alertas e acompanhamento contínuo.</p>
+    <a href="cadastro.html" class="botaoCta">Cadastre-se</a>
+  </div>
+
+  <div class="koala">
+    <div class="brilhoPosterior"></div>
+    <img src="./imagens/koala1.png" alt="Koala" width="300">
+  </div>
+</section>
+
+<section class="secaoBeneficios">
+  <h2 class="tituloSecao">Por que escolher Koavy?</h2>
+
+  <div class="gradeBeneficios">
+
+    <div class="cartaoBeneficio">
+      <div class="iconeBeneficio">
+        <img src="./imagens/heartKoavy.png" width="60">
+      </div>
+      <h3>Monitoramento 24h</h3>
+      <p>Acompanhamento contínuo com precisão.</p>
+    </div>
+
+    <div class="cartaoBeneficio">
+      <div class="iconeBeneficio">
+        <img src="./imagens/alertKoavy.png" width="60">
+      </div>
+      <h3>Alertas Reais</h3>
+      <p>Notificações automáticas em tempo real.</p>
+    </div>
+
+    <div class="cartaoBeneficio">
+      <div class="iconeBeneficio">
+        <img src="./imagens/celular.png" width="60">
+      </div>
+      <h3>App Intuitivo</h3>
+      <p>Relatórios simples e acessíveis.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="koalasono">
+    <img src="./imagens/koalaSono.png">
+
+    <div class="olhos">
+      <div class="olho-container">
+        <div class="sobrancelha"></div>
+        <div class="olho">
+          <div class="pupila"></div>
+        </div>
+      </div>
+
+      <div class="olho-container">
+        <div class="sobrancelha"></div>
+        <div class="olho">
+          <div class="pupila"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="comeco">Como Tudo Começou</h1>
+
+  <div class="row-content">
+
+    <div class="conteudo-texto">
+      <p>
+       Tudo começou com o irmão mais velho de uma dos integrantes que tem 23 anos e, desde que nasceu, sofre com uma desregulação cardíaca. Ele sempre foi uma pessoa muito ativa e é professor de beach tennis, um esporte bastante intenso. Recentemente, após perceber que ele vinha apresentando alterações cardíacas mais frequentes, a médica recomendou que ele evitasse esforços físicos intensos, devido à sua condição. Quando o irmão era mais novo, a mãe tinha muito medo e ficava preocupada sempre que ele saía de casa sem ela, pois não sabia o que poderia acontecer caso ele tivesse uma crise. Pensando nisso, surgiu a ideia de desenvolver uma pulseira inteligente que possa auxiliá-lo no monitoramento da saúde cardíaca, permitindo que ele continue praticando atividades com segurança. Com esse projeto, situações como as que a mãe vivia podem ser evitadas, já que ela — e qualquer outro responsável poderá acompanhar os sinais vitais diretamente na palma da mão, por meio de um aplicativo conectado, e tudo isso com baixo custo, tornando o acesso mais fácil para quem precisa.
+      </p>
+    </div>
+
+    <div class="video-coluna">
+      <h2 class="video-titulo">
+        Aqui está um vídeo de onde surgiu a ideia
+      </h2>
+
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/mILYtp4UHIQ" allowfullscreen></iframe>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
