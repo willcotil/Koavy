@@ -1,120 +1,65 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     const API = "http://localhost:8080";
-
     const form = document.getElementById("formCadastro");
     const erroMsg = document.getElementById("mensagemErro");
     const sucessoMsg = document.getElementById("mensagemSucesso");
 
-    // 🔥 proteção contra null (ESSENCIAL)
     if (!form) return;
 
-    const inputs = form.querySelectorAll("input, select, textarea");
-
-    inputs.forEach((input) => {
-        input.addEventListener("blur", () => validarCampo(input));
-        input.addEventListener("input", () => limparErro(input));
-    });
-
-    function setErro(input, mensagem) {
-        let span = input.parentNode.querySelector(".erro-campo");
-
-        if (!span) {
-            span = document.createElement("span");
-            span.classList.add("erro-campo");
-            input.parentNode.appendChild(span);
+    // Utilitário de idade
+    function calcularIdade(dataNascimento) {
+        if (!dataNascimento) return null;
+        const hoje = new Date();
+        const nasc = new Date(dataNascimento);
+        let idade = hoje.getFullYear() - nasc.getFullYear();
+        const m = hoje.getMonth() - nasc.getMonth();
+        if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) {
+            idade--;
         }
-
-        span.innerText = mensagem;
-        input.classList.add("erro");
-        input.classList.remove("sucesso");
+        return idade;
     }
 
-    function setSucesso(input) {
-        let span = input.parentNode.querySelector(".erro-campo");
-        if (span) span.innerText = "";
-
-        input.classList.remove("erro");
-        input.classList.add("sucesso");
-    }
-
-    function limparErro(input) {
-        input.classList.remove("erro");
-    }
-
-    function validarCampo(input) {
-        const valor = input.value.trim();
-
-        if (!valor) return true;
-
-        if (input.name === "email" && !valor.includes("@")) {
-            setErro(input, "Email inválido");
-            return false;
+    // Feedback Visual
+    function mostrarFeedback(msg, tipo) {
+        if (tipo === 'erro') {
+            erroMsg.innerText = msg;
+            erroMsg.classList.remove('hidden');
+            sucessoMsg.classList.add('hidden');
+        } else {
+            sucessoMsg.innerHTML = msg;
+            sucessoMsg.classList.remove('hidden');
+            erroMsg.classList.add('hidden');
         }
-
-        if (
-            ["idade", "peso", "altura", "telefone", "cep"].includes(input.name) &&
-            isNaN(valor)
-        ) {
-            setErro(input, "Deve ser um número");
-            return false;
-        }
-
-        if (input.name === "marcapasso") {
-            const v = valor.toLowerCase();
-            if (!["sim", "não", "nao"].includes(v)) {
-                setErro(input, "Digite sim ou não");
-                return false;
-            }
-        }
-
-        setSucesso(input);
-        return true;
-    }
-
-    function validarFormulario() {
-        let valido = true;
-
-        inputs.forEach((input) => {
-            if (!validarCampo(input)) valido = false;
-        });
-
-        return valido;
     }
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
-        erroMsg.innerHTML = "";
-        sucessoMsg.innerHTML = "";
-
-        if (!validarFormulario()) {
-            erroMsg.innerHTML = "Corrija os campos destacados";
-            return;
-        }
-
+        
+        const dataNascValue = document.getElementById("dataNascimento").value;
+        
         const usuario = {
             perfilId: 1,
             ativo: true,
-            nome: form.nome.value.trim(),
-            email: form.email.value.trim(),
-            senha: form.senha.value.trim(),
-            telefone: form.telefone.value.trim(),
-
-            idade: form.idade.value ? parseInt(form.idade.value) : null,
-            peso: form.peso.value ? parseFloat(form.peso.value) : null,
-            altura: form.altura.value ? parseFloat(form.altura.value) : null,
-
-            sexo: form.sexo.value.trim(),
-            tipoSanguineo: form.tipoSanguineo.value.trim(),
-
-            marcapasso: form.marcapasso.value.trim().toLowerCase(),
-
-            cep: form.cep.value.trim(),
-            obsMed: form.obsMed ? form.obsMed.value.trim() : "",
-
-            dataNascimento: form.dataNascimento.value || null
+            nome: document.getElementById("nome").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            senha: document.getElementById("senha").value.trim(),
+            telefone: document.getElementById("telefone").value.trim(),
+            dataNascimento: dataNascValue || null,
+            idade: calcularIdade(dataNascValue),
+            peso: Number(document.getElementById("peso").value) || null,
+            altura: Number(document.getElementById("altura").value) || null,
+            sexo: document.getElementById("sexo").value,
+            tipoSanguineo: document.getElementById("tipoSanguineo").value.trim(),
+            marcapasso: document.getElementById("marcapasso").value,
+            cep: document.getElementById("cep").value.trim(),
+            obsMed: document.getElementById("obsMed").value.trim()
         };
+
+        // Validação básica
+        if (!usuario.nome || !usuario.email || !usuario.senha) {
+            mostrarFeedback("Preencha os campos obrigatórios (Nome, Email, Senha)", "erro");
+            return;
+        }
 
         try {
             const response = await fetch(`${API}/api/usuarios/cadastro`, {
@@ -123,31 +68,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify(usuario)
             });
 
-            let data = null;
-
-            try {
-                data = await response.json();
-            } catch {
-             data = null;
-        }
             if (response.ok) {
+                const data = await response.json();
                 const pacienteId = data.id;
-
-                sucessoMsg.innerHTML = `
-                    ID do paciente: <strong>${pacienteId}</strong>
-                `;
-
-                // 🔥 salva ID para próxima tela
                 sessionStorage.setItem("pacienteId", pacienteId);
-
-
+                
+                mostrarFeedback(`
+                    <div class="flex flex-col gap-2">
+                        <span class="text-lg">✔ Cadastro realizado!</span>
+                        <span>Seu ID de paciente é: <strong class="text-xl tracking-widest">${pacienteId}</strong></span>
+                        <span class="text-xs opacity-80">Guarde este ID para seu tutor.</span>
+                        <a href="cadastrotutor.html" class="mt-4 bg-white text-black py-2 rounded-xl font-bold">Vincular Tutor Agora</a>
+                    </div>
+                `, "sucesso");
+                
+                form.reset();
             } else {
-                erroMsg.innerHTML = "Erro ao cadastrar usuário";
+                const text = await response.text();
+                mostrarFeedback(text || "Erro ao realizar cadastro.", "erro");
             }
-
         } catch (err) {
             console.error(err);
-            erroMsg.innerHTML = "Erro de conexão com a API";
+            mostrarFeedback("Falha na conexão com o servidor.", "erro");
         }
     });
 });

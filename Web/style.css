@@ -78,26 +78,33 @@ body {
     background: #00f2ff;
 }
 
-/* ================= CONTAINER PRINCIPAL ================= */
-.container {
-    width: 90%;
+/* ================= GLASS CARD (PREVIOUSLY CONTAINER) ================= */
+.glass-card {
+    width: 95%;
     max-width: 1200px;
-    margin: 120px auto 80px;
-    padding: 60px 40px 40px;
+    margin: 40px auto;
+    padding: 40px;
     backdrop-filter: blur(20px);
-    border-radius: 20px;
-    border: 1px solid rgba(0, 242, 255, 0.2);
-    box-shadow: 0 0 40px rgba(0, 242, 255, 0.25);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 32px;
+    border: 1px solid rgba(0, 242, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     position: relative;
+}
+
+.logo {
+    font-family: "Boldonse", system-ui;
+    font-weight: 900;
+    font-style: normal;
 }
 
 /* ================= HERO ================= */
 .secaoHero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: 0 8%;
+    justify-content: center;
+    padding: 100px 8% 60px;
     position: relative;
     background: radial-gradient(circle at 50% 50%, #1a1c1e 0%, #0a0a0a 100%);
 }
@@ -107,11 +114,12 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
+    pointer-events: none;
 }
 
 .conteudoHero {
     z-index: 2;
-    max-width: 550px;
+    max-width: 650px;
 }
 
 .conteudoHero h1 {
@@ -1182,12 +1190,36 @@ body {
     /* Estilo auxiliar para os inputs para manter o visual limpo */
     
     /* Fallback caso o @apply não carregue no browser sem processador */
-    input, textarea {
-      width: 100%;
-      background: #1f2937;
-      border: 1px solid #374151;
-      border-radius: 0.25rem;
-      padding: 0.5rem;
-      color: white;
-      margin-bottom: 0.5rem;
-    }
+/* ================= ANIMAÇÕES DE SCROLL ================= */
+.reveal {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-up {
+    transform: translateY(40px);
+}
+
+.reveal-left {
+    transform: translateX(-40px);
+}
+
+.reveal-right {
+    transform: translateX(40px);
+}
+
+.reveal-zoom {
+    transform: scale(0.9);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translate(0) scale(1);
+}
+
+/* Delays para sequências */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }

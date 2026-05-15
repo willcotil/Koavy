@@ -1,105 +1,97 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Login Koavy</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Koavy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon1: '#00f2ff',
+            neon2: '#00d4aa',
+            dark1: '#121212',
+            dark2: '#0f1011',
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
+<body class="bg-dark2 text-gray-300 font-inter min-h-screen flex flex-col">
 
-<body>
-    
-    <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/40 border-b border-cyan-400/20">
+<!-- NAVBAR -->
+<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/40 border-b border-white/5">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-    <h1 class="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-      Koavy
-    </h1>
-
-    <div class="hidden md:flex gap-10 text-gray-300">
-      <a href="interface.html">Início</a>
-      <a href="#" class="hover:text-cyan-400 transition">Benefícios</a>
-      <a href="#" class="hover:text-cyan-400 transition">Sobre</a>
+    <div class="flex items-center gap-2">
+      <a href="interface.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-neon1 to-neon2 rounded-lg flex items-center justify-center">
+          <span class="text-black font-black text-xl">K</span>
+        </div>
+        <h1 class="text-2xl font-black bg-gradient-to-r from-neon1 to-neon2 bg-clip-text text-transparent logo">Koavy</h1>
+      </a>
     </div>
 
-    <a href="cadastro.html" class="hidden md:block bg-gradient-to-r from-cyan-400 to-emerald-400 text-black px-6 py-2 rounded-full font-bold hover:scale-105 transition">
-      Cadastrar-se
-    </a>
-
-    <button id="menu-btn" class="md:hidden text-white text-2xl">
-      ☰
-    </button>
-
-  </div>
-
-  <div id="mobile-menu" class="hidden flex-col items-center gap-6 py-6 bg-black/90 md:hidden">
-    <a href="interface.html">Início</a>
-    <a href="#" class="text-gray-300 hover:text-cyan-400">Benefícios</a>
-    <a href="#" class="text-gray-300 hover:text-cyan-400">Sobre</a>
-
-    <a href="cadastro.html" class="bg-gradient-to-r from-cyan-400 to-emerald-400 text-black px-6 py-2 rounded-full font-bold">
-      Cadastrar-se
+    <a href="cadastro.html" class="border border-white/10 px-8 py-2 rounded-full font-bold hover:bg-white/5 transition">
+      Criar Conta
     </a>
   </div>
 </nav>
 
-
-<main id="container">
-
-    <div class="brilhoPosterior"></div>
-
+<main class="flex-1 flex items-center justify-center p-4">
+  <div class="w-full max-w-md bg-white/5 border border-white/10 rounded-[40px] p-8 lg:p-12 backdrop-blur-md shadow-2xl relative overflow-hidden reveal reveal-zoom active">
     
+    <div class="absolute -top-20 -right-20 w-64 h-64 bg-neon1/10 rounded-full blur-[80px]"></div>
+    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-neon2/10 rounded-full blur-[80px]"></div>
 
-    <form id="login_form">
-        <div id="form_header">
-            <h1>Login</h1>
-           
+    <div class="text-center mb-10 relative z-10">
+      <h1 class="text-4xl font-black text-white mb-2">Bem-vindo</h1>
+      <p class="text-gray-500 font-medium">Acesse sua conta para continuar.</p>
+    </div>
+
+    <form id="login_form" class="space-y-6 relative z-10">
+      <div class="space-y-2">
+        <label class="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">E-mail de Acesso</label>
+        <input type="text" id="name" name="nome" placeholder="seu@email.com" class="login-input">
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex justify-between items-center px-2">
+          <label class="text-[10px] font-black uppercase tracking-widest text-gray-500">Senha</label>
+          <a href="#" class="text-[10px] font-bold text-neon1 hover:underline">Esqueci a senha</a>
         </div>
+        <input type="password" id="password" name="senha" placeholder="••••••••" class="login-input">
+      </div>
 
-        <div id="social_media">
-            <a href="#">
-                <img src="imagens/google.png" alt="Google">
-            </a>
-        </div>
+      <button type="submit" id="login_button" class="w-full py-5 bg-gradient-to-r from-neon1 to-neon2 text-black font-black text-lg rounded-2xl shadow-xl shadow-neon1/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+        Entrar no Sistema
+      </button>
 
-        <div id="inputs">
-
-            <div class="input-box">
-                <label for="name">Nome</label>
-                <div class="input-field">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" id="name" name="nome" placeholder="Digite seu nome">
-                </div>
-            </div>
-
-            <div class="input-box">
-                <label for="password">Senha</label>
-                <div class="input-field">
-                    <i class="fa-solid fa-key"></i>
-                    <input type="password" id="password" name="senha" placeholder="Digite sua senha">
-                </div>
-
-                <div id="forgot_password">
-                    <a href="#">Esqueceu sua senha?</a>
-                </div>
-            </div>
-
-        </div>
-
-        <button type="submit" id="login_button">
-            Login
-        </button>
-        <div id="mensagemErro" style="color:red; margin-top:10px;"></div>
+      <div id="mensagemErro" class="text-center text-red-500 text-sm font-bold mt-4"></div>
     </form>
 
+    <div class="mt-12 pt-8 border-t border-white/5 text-center relative z-10">
+      <p class="text-xs text-gray-600 mb-6 font-black uppercase tracking-widest">Ou entre com</p>
+      <div class="flex justify-center gap-4">
+        <button class="w-full py-3 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center gap-3 hover:bg-white/10 transition">
+          <img src="imagens/google.png" alt="Google" class="w-5">
+          <span class="text-sm font-bold">Google</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </main>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .login-input {
+    @apply w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-neon1/50 focus:ring-1 focus:ring-neon1/20 transition-all placeholder:text-gray-700;
+  }
+</style>
+
 <script src="login.js"></script>
 </body>
 </html>

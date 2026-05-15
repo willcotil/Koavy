@@ -1,66 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Cadastro - Tutor</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css">
-
-<script defer src="cadastrotutor.js"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro Tutor - Koavy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon1: '#00f2ff',
+            neon2: '#00d4aa',
+            dark1: '#121212',
+            dark2: '#0f1011',
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body class="bg-[#0f1011]">
+<body class="bg-dark2 text-gray-300 font-inter min-h-screen">
 
 <!-- NAVBAR -->
-<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/40 border-b border-cyan-400/20">
+<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/40 border-b border-white/5">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-    <h1 class="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-      Koavy
-    </h1>
-
-    <div class="hidden md:flex gap-10 text-gray-300">
-      <a href="interface.html">Início</a>
-      <a href="#">Benefícios</a>
-      <a href="#">Sobre</a>
+    <div class="flex items-center gap-2">
+      <a href="interface.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-neon1 to-neon2 rounded-lg flex items-center justify-center">
+          <span class="text-black font-black text-xl">K</span>
+        </div>
+        <h1 class="text-2xl font-black bg-gradient-to-r from-neon1 to-neon2 bg-clip-text text-transparent logo">Koavy</h1>
+      </a>
     </div>
 
-    <a href="login.html" class="hidden md:block bg-gradient-to-r from-cyan-400 to-emerald-400 text-black px-6 py-2 rounded-full font-bold hover:scale-105 transition">
+    <div class="hidden md:flex gap-10 text-sm font-bold tracking-widest uppercase">
+      <a href="interface.html" class="hover:text-neon1 transition">Início</a>
+      <a href="interface.html#beneficios" class="hover:text-neon1 transition">Benefícios</a>
+      <a href="interface.html#sobre" class="hover:text-neon1 transition">Sobre</a>
+    </div>
+
+    <a href="login.html" class="hidden md:block border border-white/10 px-8 py-2 rounded-full font-bold hover:bg-white/5 transition">
       Login
     </a>
-
   </div>
 </nav>
 
-  <div id="containerTutor">
-  <form id="tutor_form">
+<div class="pt-32 pb-20 px-4 flex justify-center items-center min-h-screen">
+  <div class="max-w-2xl w-full bg-white/5 border border-white/10 rounded-[40px] p-8 lg:p-12 backdrop-blur-md shadow-2xl relative overflow-hidden reveal reveal-zoom active">
+    
+    <div class="absolute top-0 right-0 w-64 h-64 bg-neon1/5 rounded-full blur-[100px] -z-10"></div>
 
-    <h1 class="titulo-tutor">Cadastro de Tutor</h1>
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-black text-white mb-4">Cadastro de Tutor</h1>
+      <p class="text-gray-500">Vincule-se a um paciente para monitorar sua saúde em tempo real.</p>
+    </div>
 
-    <div class="grid-tutor">
+    <form id="tutor_form" class="space-y-8">
+      
+      <div class="space-y-6">
+        <div class="space-y-2">
+          <label class="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">Seu Nome Completo</label>
+          <input id="nomeTutor" type="text" placeholder="Como devemos te chamar?" class="tutor-input">
+        </div>
 
-  <input class="input-tail full" type="text" id="nomeTutor" placeholder="Nome do tutor">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label class="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">ID do Paciente</label>
+            <input id="pacienteId" type="number" placeholder="Ex: 123" class="tutor-input">
+            <p class="text-[10px] text-gray-600 ml-1">Peça o ID ao paciente cadastrado.</p>
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs font-black uppercase tracking-widest text-gray-500 ml-1">Data do Vínculo</label>
+            <input id="dataVinculo" type="date" class="tutor-input">
+          </div>
+        </div>
+      </div>
 
-  <input class="input-tail" type="number" id="pacienteId" placeholder="ID do paciente">
+      <div class="pt-6 border-t border-white/5">
+        <div id="mensagemTutor" class="mb-6"></div>
 
-  <input class="input-tail" type="date" id="dataVinculo">
+        <button id="btnTutor" type="submit" class="w-full py-5 bg-gradient-to-r from-neon1 to-neon2 text-black font-black text-lg rounded-2xl shadow-xl shadow-neon1/20 hover:scale-[1.01] active:scale-[0.99] transition-all">
+          Vincular como Tutor
+        </button>
+        
+        <p class="mt-8 text-center text-gray-500 text-sm">
+          Você é o paciente? 
+          <a href="cadastro.html" class="text-neon1 font-bold hover:underline ml-1">Cadastrar como Paciente</a>
+        </p>
+      </div>
 
+    </form>
+  </div>
 </div>
 
-<button type="submit" id="btnTutor">
-  Cadastrar Tutor
-</button>
+<style>
+  .tutor-input {
+    @apply w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-neon1/50 focus:ring-1 focus:ring-neon1/20 transition-all placeholder:text-gray-700;
+  }
+</style>
 
-<div id="mensagemTutor"></div>
-
-    <a href="cadastro.html" class="btn-small btn-paciente">
-   Sou Paciente
-</a>
-
-  </form>
-</div>
-
+<script defer src="cadastrotutor.js"></script>
 </body>
 </html>

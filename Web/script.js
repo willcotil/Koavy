@@ -83,6 +83,25 @@ const setupCena = () => {
     animar();
 };
 
+// ================= REVEAL ON SCROLL =================
+const iniciarRevelacao = () => {
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    const elementsToReveal = document.querySelectorAll('.reveal');
+    elementsToReveal.forEach(el => revealObserver.observe(el));
+};
+
 // ================= MENU =================
 const iniciarMenuMobile = () => {
     const btn = document.getElementById('menu-btn');
@@ -100,5 +119,6 @@ window.addEventListener('DOMContentLoaded', () => {
     criarParticulas();
     iniciarOlhos();
     setupCena();
+    iniciarRevelacao();
     iniciarMenuMobile();
 });

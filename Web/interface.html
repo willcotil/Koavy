@@ -1,147 +1,242 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Koavy</title>
+  <title>Koavy - Monitoramento Cardíaco Inteligente</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon1: '#00f2ff',
+            neon2: '#00d4aa',
+            dark1: '#121212',
+            dark2: '#0f1011',
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body>
+<body class="bg-dark2 text-gray-200 selection:bg-neon1/30 selection:text-neon1">
 
-<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/40 border-b border-cyan-400/20">
+<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/60 border-b border-white/10 transition-all duration-300" id="main-nav">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-    <h1 class="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent", class="titulo">
-      Koavy
-    </h1>
-
-    <div class="hidden md:flex gap-10 text-gray-300">
-      <a href="interface.html" class="nav-active relative">Início</a>
-      <a href="#" class="hover:text-cyan-400 transition">Benefícios</a>
-      <a href="#" class="hover:text-cyan-400 transition">Sobre</a>
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-gradient-to-br from-neon1 to-neon2 rounded-lg flex items-center justify-center shadow-lg shadow-neon1/20">
+        <span class="text-black font-black text-xl">K</span>
+      </div>
+      <h1 class="text-2xl font-black bg-gradient-to-r from-neon1 to-neon2 bg-clip-text text-transparent logo">
+        Koavy
+      </h1>
     </div>
 
-    <a href="login.html" class="hidden md:block bg-gradient-to-r from-cyan-400 to-emerald-400 text-black px-6 py-2 rounded-full font-bold hover:scale-105 transition">
-      Entrar
-    </a>
+    <div class="hidden md:flex gap-8 text-sm font-semibold tracking-wide uppercase">
+      <a href="#inicio" class="text-neon1 border-b-2 border-neon1 pb-1">Início</a>
+      <a href="#beneficios" class="hover:text-neon1 transition-colors duration-300">Benefícios</a>
+      <a href="#sobre" class="hover:text-neon1 transition-colors duration-300">Sobre</a>
+    </div>
 
-    <button id="menu-btn" class="md:hidden text-white text-2xl">
-      ☰
-    </button>
+    <div class="flex items-center gap-4">
+      <a href="login.html" class="hidden md:flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 px-6 py-2 rounded-full font-bold transition-all hover:border-neon1/50">
+        Entrar
+      </a>
+      <a href="cadastro.html" class="hidden md:block bg-gradient-to-r from-neon1 to-neon2 text-black px-6 py-2 rounded-full font-bold hover:shadow-[0_0_20px_rgba(0,242,255,0.4)] hover:scale-105 transition-all">
+        Começar Agora
+      </a>
+      <button id="menu-btn" class="md:hidden text-white text-3xl focus:outline-none">
+        <span id="menu-icon">☰</span>
+      </button>
+    </div>
 
   </div>
 
-  <div id="mobile-menu" class="hidden flex-col items-center gap-6 py-6 bg-black/90 md:hidden">
-    <a href="interface.html" class="nav-active">Início</a>
-    <a href="#" class="text-gray-300 hover:text-cyan-400">Benefícios</a>
-    <a href="#" class="text-gray-300 hover:text-cyan-400">Sobre</a>
-
-    <a href="login.html" class="bg-gradient-to-r from-cyan-400 to-emerald-400 text-black px-6 py-2 rounded-full font-bold">
-      Entrar
-    </a>
+  <div id="mobile-menu" class="hidden absolute top-full left-0 w-full flex-col items-center gap-6 py-8 bg-black/95 backdrop-blur-2xl border-b border-white/10 animate-fade-in-down">
+    <a href="#inicio" class="text-neon1 font-bold text-lg">Início</a>
+    <a href="#beneficios" class="text-gray-300 hover:text-neon1 text-lg">Benefícios</a>
+    <a href="#sobre" class="text-gray-300 hover:text-neon1 text-lg">Sobre</a>
+    <div class="flex flex-col w-full px-10 gap-4 mt-4">
+      <a href="login.html" class="w-full text-center border border-white/20 py-3 rounded-xl font-bold">Entrar</a>
+      <a href="cadastro.html" class="w-full text-center bg-gradient-to-r from-neon1 to-neon2 text-black py-3 rounded-xl font-bold shadow-lg shadow-neon1/20">Cadastrar-se</a>
+    </div>
   </div>
 </nav>
 
-<section class="secaoHero pt-28">
-  <div id="particulas"></div>
+<section id="inicio" class="secaoHero overflow-hidden pt-20">
+  <div id="particulas" class="opacity-30"></div>
 
-  <div class="conteudoHero">
-    <h1>Monitore seu coração em tempo real</h1>
-    <p>Monitoramento inteligente com alertas e acompanhamento contínuo.</p>
-    <a href="cadastro.html" class="botaoCta">Cadastre-se</a>
-  </div>
-
-  <div class="koala">
-    <div class="brilhoPosterior"></div>
-    <img src="./imagens/koala1.png" alt="Koala" width="300">
-  </div>
-</section>
-
-<section class="secaoBeneficios">
-  <h2 class="tituloSecao">Por que escolher Koavy?</h2>
-
-  <div class="gradeBeneficios">
-
-    <div class="cartaoBeneficio">
-      <div class="iconeBeneficio">
-        <img src="./imagens/heartKoavy.png" width="60">
+  <div class="container mx-auto px-6 grid lg:grid-cols-2 items-center gap-12 relative z-10">
+    <div class="conteudoHero text-center lg:text-left reveal reveal-left">
+      <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-neon1/10 border border-neon1/20 text-neon1 text-sm font-bold tracking-widest uppercase animate-pulse">
+        Tecnologia que salva vidas
       </div>
-      <h3>Monitoramento 24h</h3>
-      <p>Acompanhamento contínuo com precisão.</p>
-    </div>
-
-    <div class="cartaoBeneficio">
-      <div class="iconeBeneficio">
-        <img src="./imagens/alertKoavy.png" width="60">
-      </div>
-      <h3>Alertas Reais</h3>
-      <p>Notificações automáticas em tempo real.</p>
-    </div>
-
-    <div class="cartaoBeneficio">
-      <div class="iconeBeneficio">
-        <img src="./imagens/celular.png" width="60">
-      </div>
-      <h3>App Intuitivo</h3>
-      <p>Relatórios simples e acessíveis.</p>
-    </div>
-
-  </div>
-</section>
-
-<div class="container">
-
-  <div class="koalasono">
-    <img src="./imagens/koalaSono.png">
-
-    <div class="olhos">
-      <div class="olho-container">
-        <div class="sobrancelha"></div>
-        <div class="olho">
-          <div class="pupila"></div>
-        </div>
-      </div>
-
-      <div class="olho-container">
-        <div class="sobrancelha"></div>
-        <div class="olho">
-          <div class="pupila"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <h1 class="comeco">Como Tudo Começou</h1>
-
-  <div class="row-content">
-
-    <div class="conteudo-texto">
-      <p>
-       Tudo começou com o irmão mais velho de uma dos integrantes que tem 23 anos e, desde que nasceu, sofre com uma desregulação cardíaca. Ele sempre foi uma pessoa muito ativa e é professor de beach tennis, um esporte bastante intenso. Recentemente, após perceber que ele vinha apresentando alterações cardíacas mais frequentes, a médica recomendou que ele evitasse esforços físicos intensos, devido à sua condição. Quando o irmão era mais novo, a mãe tinha muito medo e ficava preocupada sempre que ele saía de casa sem ela, pois não sabia o que poderia acontecer caso ele tivesse uma crise. Pensando nisso, surgiu a ideia de desenvolver uma pulseira inteligente que possa auxiliá-lo no monitoramento da saúde cardíaca, permitindo que ele continue praticando atividades com segurança. Com esse projeto, situações como as que a mãe vivia podem ser evitadas, já que ela — e qualquer outro responsável poderá acompanhar os sinais vitais diretamente na palma da mão, por meio de um aplicativo conectado, e tudo isso com baixo custo, tornando o acesso mais fácil para quem precisa.
+      <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight mb-6">
+        Seu coração <br/>
+        <span class="bg-gradient-to-r from-neon1 to-neon2 bg-clip-text text-transparent">em tempo real</span>
+      </h1>
+      <p class="text-lg text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+        Monitoramento inteligente com alertas instantâneos, acompanhamento contínuo e tecnologia de ponta para garantir a sua segurança e a de quem você ama.
       </p>
-    </div>
-
-    <div class="video-coluna">
-      <h2 class="video-titulo">
-        Aqui está um vídeo de onde surgiu a ideia
-      </h2>
-
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/mILYtp4UHIQ" allowfullscreen></iframe>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+        <a href="cadastro.html" class="botaoCta text-lg py-4 px-10 rounded-2xl shadow-xl shadow-neon1/20">Experimentar Gratuitamente</a>
+        <a href="#sobre" class="flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white/10 transition-all">
+          <span>Saiba Mais</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+          </svg>
+        </a>
       </div>
     </div>
 
+    <div class="relative flex justify-center items-center reveal reveal-right delay-200">
+      <div class="brilhoPosterior scale-150 opacity-50"></div>
+      <div class="koala relative z-20 group">
+        <img src="./imagens/koala1.png" alt="Koala Mascote" class="w-[300px] lg:w-[450px] drop-shadow-[0_0_30px_rgba(0,242,255,0.2)] transition-transform duration-700 group-hover:scale-105">
+        
+        <div class="absolute -bottom-10 -right-10 bg-black/40 backdrop-blur-md border border-white/10 p-4 rounded-2xl hidden lg:block animate-bounce shadow-2xl">
+          <div class="flex items-center gap-3">
+            <div class="w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
+            <span class="text-sm font-bold text-white">Batimentos: 72 BPM</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-</div>
+<section id="beneficios" class="secaoBeneficios bg-dark1/30 relative">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 reveal reveal-up">
+      <h2 class="text-4xl lg:text-5xl font-black mb-4 tituloSecao">Por que escolher Koavy?</h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Nossa plataforma combina hardware de precisão com software inteligente para oferecer o melhor cuidado cardíaco do mercado.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="cartaoBeneficio group reveal reveal-up delay-100">
+        <div class="w-16 h-16 bg-neon1/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-neon1/20 transition-colors">
+          <img src="./imagens/heartKoavy.png" class="w-10">
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-white">Monitoramento 24h</h3>
+        <p class="text-gray-400 leading-relaxed">Sensores de alta precisão que acompanham seu ritmo cardíaco a cada segundo, detectando anomalias instantaneamente.</p>
+      </div>
+
+      <div class="cartaoBeneficio group border-neon1/20 reveal reveal-up delay-200">
+        <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500/20 transition-colors">
+          <img src="./imagens/alertKoavy.png" class="w-10">
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-white">Alertas Reais</h3>
+        <p class="text-gray-400 leading-relaxed">Em caso de queda ou arritmia, enviamos alertas imediatos para seus tutores cadastrados com sua localização exata.</p>
+      </div>
+
+      <div class="cartaoBeneficio group reveal reveal-up delay-300">
+        <div class="w-16 h-16 bg-cyan-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cyan-500/20 transition-colors">
+          <img src="./imagens/celular.png" class="w-10">
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-white">App Intuitivo</h3>
+        <p class="text-gray-400 leading-relaxed">Visualize seu histórico, gere relatórios para seu médico e acompanhe sua evolução através de um painel simples e moderno.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="py-24 relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-neon1/5 rounded-full blur-[120px] -z-10"></div>
+  
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="bg-white/5 border border-white/10 rounded-[40px] p-8 lg:p-16 backdrop-blur-sm relative overflow-hidden reveal reveal-zoom">
+      
+      <div class="koalasono hidden lg:block opacity-20 pointer-events-none">
+        <img src="./imagens/koalaSono.png" class="w-64">
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-16 items-center">
+        <div class="lg:w-1/2 reveal reveal-left delay-200">
+          <h2 class="text-4xl lg:text-5xl font-black mb-8 leading-tight">Como Tudo <br/><span class="text-neon1">Começou</span></h2>
+          <div class="space-y-6 text-gray-400 text-lg leading-relaxed">
+            <p>
+              Tudo começou com uma necessidade real e familiar. Um de nossos fundadores via o desafio diário de seu irmão, professor de beach tennis, que precisava monitorar sua saúde cardíaca sem abrir mão de sua paixão pelo esporte.
+            </p>
+            <p>
+              Percebemos que o medo de crises e a falta de acompanhamento em tempo real limitavam a vida de muitas pessoas. Assim nasceu o Koavy: uma solução acessível, precisa e inteligente.
+            </p>
+          </div>
+          <div class="mt-10 flex items-center gap-6">
+            <div class="flex -space-x-4">
+              <div class="w-12 h-12 rounded-full border-2 border-dark2 bg-gray-800"></div>
+              <div class="w-12 h-12 rounded-full border-2 border-dark2 bg-gray-700"></div>
+              <div class="w-12 h-12 rounded-full border-2 border-dark2 bg-gray-600"></div>
+            </div>
+            <p class="text-sm font-bold text-gray-400">+500 Vidas impactadas</p>
+          </div>
+        </div>
+
+        <div class="lg:w-1/2 w-full reveal reveal-right delay-400">
+          <div class="relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-neon1 to-neon2 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div class="relative bg-black rounded-3xl overflow-hidden shadow-2xl">
+              <div class="aspect-video">
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/mILYtp4UHIQ" title="Nossa História" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+          <p class="mt-6 text-center italic text-gray-500">Conheça os detalhes da nossa trajetória no vídeo acima.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-black py-12 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 bg-gradient-to-br from-neon1 to-neon2 rounded flex items-center justify-center">
+        <span class="text-black font-black text-xs">K</span>
+      </div>
+      <span class="text-xl font-black text-white logo">Koavy</span>
+    </div>
+    
+    <div class="flex gap-8 text-gray-500 text-sm">
+      <a href="#" class="hover:text-white transition">Privacidade</a>
+      <a href="#" class="hover:text-white transition">Termos</a>
+      <a href="#" class="hover:text-white transition">Suporte</a>
+    </div>
+
+    <p class="text-gray-600 text-sm">&copy; 2026 Koavy. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const nav = document.getElementById('main-nav');
+
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    menuIcon.textContent = mobileMenu.classList.contains('hidden') ? '☰' : '✕';
+  });
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('bg-black/90', 'py-3');
+      nav.classList.remove('bg-black/60', 'py-4');
+    } else {
+      nav.classList.remove('bg-black/90', 'py-3');
+      nav.classList.add('bg-black/60', 'py-4');
+    }
+  });
+</script>
 
 <script src="script.js"></script>
 
